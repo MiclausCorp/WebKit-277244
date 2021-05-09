@@ -1,0 +1,613 @@
+2021-05-07  Ross Kirsling  <ross.kirsling@sony.com>
+
+        [JSC] Error#cause must recognize explicit undefined
+        https://bugs.webkit.org/show_bug.cgi?id=225535
+
+        Reviewed by Alexey Shvayka.
+
+        * test262/config.yaml:
+        Re-enable tests for this feature; they were all failing due to this quirk.
+
+2021-05-07  Ross Kirsling  <ross.kirsling@sony.com>
+
+        Update test262 (2021.05.07)
+        https://bugs.webkit.org/show_bug.cgi?id=225536
+
+        Reviewed by Alexey Shvayka.
+
+        * test262/config.yaml:
+        * test262/expectations.yaml:
+        * test262/latest-changes-summary.txt:
+        * test262/test/:
+        * test262/test262-Revision.txt:
+
+2021-05-06  Mark Lam  <mark.lam@apple.com>
+
+        Forbid further execution in jsc shell if execution is terminated.
+        https://bugs.webkit.org/show_bug.cgi?id=225410
+        rdar://77548608
+
+        Reviewed by Michael Saboff.
+
+        * stress/jsc-shell-forbid-execution-after-termination.js: Added.
+
+2021-05-05  Saam Barati  <sbarati@apple.com>
+
+        Update tests to use collectExtraSamplingProfilerData instead of collectSamplingProfilerDataForJSCShell
+        https://bugs.webkit.org/show_bug.cgi?id=225398
+
+        Reviewed by Mark Lam.
+
+        I forgot to update the tests to use the new option name.
+
+        * stress/sampling-profiler-code-origin.js:
+        * stress/sampling-profiler-richards.js:
+
+2021-05-03  Mark Lam  <mark.lam@apple.com>
+
+        Fix syntax error message for AUTOPLUSPLUS token.
+        https://bugs.webkit.org/show_bug.cgi?id=225308
+        rdar://76830934
+
+        Reviewed by Saam Barati.
+
+        * stress/prefix-plusplus-syntax-error-should-say-plusplus.js: Added.
+
+2021-05-03  Dmitry Bezhetskov  <dbezhetskov@igalia.com>
+
+        [WASM-Function-References] Add call_ref instruction
+        https://bugs.webkit.org/show_bug.cgi?id=222903
+
+        Reviewed by Yusuke Suzuki.
+
+        Add basic tests for new call_ref instruction:
+        https://github.com/WebAssembly/function-references/blob/master/proposals/function-references/Overview.md.
+        Add tests for calling same-instance wasm function, foreign-instance
+        wasm function and for calling imported js function.
+
+        * wasm.yaml:
+        * wasm/function-references/call_ref.js: Added.
+        (module):
+        (async basics):
+        (async indirectCall):
+        (async importHostCall):
+        * wasm/wasm.json:
+
+2021-04-28  Mark Lam  <mark.lam@apple.com>
+
+        Fix exception assertions in light of the TerminationException.
+        https://bugs.webkit.org/show_bug.cgi?id=225128
+        rdar://76694909
+
+        Reviewed by Robin Morisset.
+
+        * stress/suppress-TerminationException-in-JSFunction-prototypeForConstruction.js: Added.
+
+2021-04-27  Angelos Oikonomopoulos  <angelos@igalia.com>
+
+        [JSC] Skip tests failing on Loongson 3A4000
+        https://bugs.webkit.org/show_bug.cgi?id=225091
+
+        Reviewed by Yusuke Suzuki.
+
+        This new hardware is much faster when it comes to running JSC tests (and
+        hopefully more reliable than the ci20 boards currently in use), so skip the
+        couple of tests that fail, so that we can test the Loongson box in production.
+
+        * ChakraCore.yaml:
+        * stress/arguments-properties-order.js:
+
+2021-04-26  Mark Lam  <mark.lam@apple.com>
+
+        %TypedArray%.prototype.sort() should not use a regular array as a temp buffer.
+        https://bugs.webkit.org/show_bug.cgi?id=225062
+        rdar://77021547
+
+        Reviewed by Yusuke Suzuki.
+
+        * stress/typedarray-sort-should-not-use-a-regular-array-as-temp-buffer.js: Added.
+
+2021-04-26  Alexey Shvayka  <shvaikalesh@gmail.com>
+
+        [JSC] OrdinarySet should invoke custom [[Set]] methods
+        https://bugs.webkit.org/show_bug.cgi?id=217916
+
+        Reviewed by Yusuke Suzuki.
+
+        * microbenchmarks/put-slow-no-cache-array.js: Added.
+        * microbenchmarks/put-slow-no-cache-function.js: Added.
+        * microbenchmarks/put-slow-no-cache-js-proxy.js: Added.
+        * microbenchmarks/put-slow-no-cache-long-prototype-chain.js: Added.
+        * microbenchmarks/put-slow-no-cache.js: Added.
+        * microbenchmarks/reflect-set-with-receiver.js: Added.
+        * stress/custom-get-set-proto-chain-put.js:
+        * stress/module-namespace-access-set-fails.js: Added.
+        * stress/put-non-reified-static-accessor-or-custom.js: Added.
+        * stress/put-non-reified-static-function-or-custom.js: Added.
+        * stress/put-to-primitive-non-reified-static-custom.js: Added.
+        * stress/put-to-primitive.js: Added.
+        * stress/put-to-proto-chain-overrides-put.js: Added.
+        * stress/typed-array-canonical-numeric-index-string-set.js: Added.
+
+2021-04-22  Yusuke Suzuki  <ysuzuki@apple.com>
+
+        [JSC] Baseline should have fast path for switch_imm
+        https://bugs.webkit.org/show_bug.cgi?id=224521
+
+        Reviewed by Tadeu Zagallo.
+
+        * stress/switch-imm-baseline.js: Added.
+        (shouldBe):
+        (test):
+
+2021-04-21  Yusuke Suzuki  <ysuzuki@apple.com>
+
+        [JSC] DFG / FTL should inline switch_string
+        https://bugs.webkit.org/show_bug.cgi?id=224578
+
+        Reviewed by Mark Lam.
+
+        * microbenchmarks/switch-inlining.js: Added.
+        (inner):
+        (outer):
+        * stress/switch-inlining-nested.js: Added.
+        (shouldBe):
+        (inner):
+        (outer):
+
+2021-04-21  Caio Lima  <ticaiolima@gmail.com>
+
+        [JSC] Unskip some tests for ARMv7 and MIPS
+        https://bugs.webkit.org/show_bug.cgi?id=224813
+
+        Unreviewed test gardening.
+
+        * stress/has-own-property-name-cache-symbols-and-strings.js:
+        * stress/incremental-marking-should-not-dead-lock-in-new-property-transition.js:
+
+2021-04-20  Paulo Matos  <pmatos@igalia.com>
+
+        Unskip couple of tests for armv7l and mips
+        https://bugs.webkit.org/show_bug.cgi?id=224607
+
+        Unreviewed gardening.
+
+        * stress/check-stack-overflow-before-value-profiling-arguments.js:
+        (fullGC):
+        * stress/intl-suppored-locales-of.js:
+
+2021-04-20  Yusuke Suzuki  <ysuzuki@apple.com>
+
+        [JSC] Limit memory allocation size of JSTests/stress/early-return-from-builtin.js
+        https://bugs.webkit.org/show_bug.cgi?id=224803
+        <rdar://problem/75597901>
+
+        Reviewed by Ryosuke Niwa.
+
+        Add limit to JSTests/stress/early-return-from-builtin.js to avoid infinite allocation.
+
+        * stress/early-return-from-builtin.js:
+        (let.iter.Symbol.iterator):
+
+2021-04-19  Yusuke Suzuki  <ysuzuki@apple.com>
+
+        [JSC] Rebaseline test results for new ICU
+        https://bugs.webkit.org/show_bug.cgi?id=224792
+
+        Reviewed by Mark Lam.
+
+        This patch updates some intl- tests' expectation since it is changed because of ICU CLDR data change.
+
+        * stress/intl-datetimeformat-formatrange-relevant-extensions-ja.js:
+        (shouldBeOneOfThem):
+        (vm.icuVersion):
+        * stress/intl-datetimeformat-formatrange-relevant-extensions.js:
+        (shouldBeOneOfThem):
+        * stress/intl-datetimeformat-formatrange-should-not-handle-gregorian-change-date.js:
+        (shouldBe):
+        (vm.icuHeaderVersion):
+        * stress/intl-datetimeformat-formatrangetoparts-relevant-extensions-ja.js:
+        (normalize):
+        (shouldBe):
+        (compareParts):
+        (shouldBeOneOfParts):
+        (shouldBeParts):
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.shouldBeOneOfParts.fmt5.formatRangeToParts):
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.vm.icuVersion):
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.shouldBeOneOfParts.fmt7.formatRangeToParts):
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.shouldBeOneOfParts.fmt9.formatRangeToParts):
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.shouldBeOneOfParts.fmt11.formatRangeToParts):
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.shouldBeOneOfParts.fmt13.formatRangeToParts):
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.shouldBeParts.fmt13.formatRangeToParts):
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.shouldBeOneOfParts.fmt14.formatRangeToParts):
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.shouldBeOneOfParts.fmt15.formatRangeToParts):
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.shouldBeOneOfParts.fmt16.formatRangeToParts):
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt1.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt2.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt3.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt4.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt5.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt6.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt7.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt8.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt9.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt10.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt11.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt12.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt13.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt14.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt15.formatRangeToParts): Deleted.
+        (Intl.DateTimeFormat.prototype.formatRangeToParts.compareParts.fmt16.formatRangeToParts): Deleted.
+        * stress/intl-datetimeformat-formatrangetoparts-relevant-extensions.js:
+        (normalize):
+        (shouldBe):
+        (compareParts):
+        (shouldBeOneOfParts):
+        (shouldBeParts):
+        * stress/intl-datetimeformat-formatrangetoparts-should-not-handle-gregorian-change-date.js:
+        (shouldBe):
+        * stress/intl-datetimeformat.js:
+        (shouldBeOneOfThem):
+
+2021-04-16  Guillaume Emont  <guijemont@igalia.com>
+
+        [JSC] Unskip stress/intl-parse-unicode-subtags.js on arm
+        https://bugs.webkit.org/show_bug.cgi?id=224679
+
+        Unreviewed test gardening.
+
+        * stress/intl-parse-unicode-subtags.js: Unskipped, as it passes fine
+        now.
+
+2021-04-16  Xan Lopez  <xan@igalia.com>
+
+        [JSC][ARMv7] Unskip stress/put-direct-index-broken-2.js
+        https://bugs.webkit.org/show_bug.cgi?id=224661
+
+        Unreviewed test gardening.
+
+        * stress/put-direct-index-broken-2.js: unskip on ARMv7, could not
+        reproduce locally the crash we saw earlier.
+
+2021-04-15  Mark Lam  <mark.lam@apple.com>
+
+        HashMapImpl::rehash() should use a version of jsMapHash that cannot throw.
+        https://bugs.webkit.org/show_bug.cgi?id=224610
+        rdar://76698910
+
+        Reviewed by Yusuke Suzuki.
+
+        * stress/suppress-TerminationException-in-HashMapImpl-rehash.js: Added.
+
+2021-04-14  Mark Lam  <mark.lam@apple.com>
+
+        Add missing exception check in operationGetPrivateNameOptimize().
+        https://bugs.webkit.org/show_bug.cgi?id=224592
+        rdar://76645873
+
+        Reviewed by Yusuke Suzuki.
+
+        * stress/suppress-TerminationException-in-operationGetPrivateNameOptimize.js: Added.
+
+2021-04-14  Mark Lam  <mark.lam@apple.com>
+
+        Defer TerminationExceptions when evaluating ASSERT in HashMapIml::addNormalized().
+        https://bugs.webkit.org/show_bug.cgi?id=224565
+        rdar://76645980
+
+        Reviewed by Yusuke Suzuki.
+
+        * stress/suppress-TerrminationException-in-ASSERT-in-HashMapImpl-addNormalized.js: Added.
+
+2021-04-14  Guillaume Emont  <guijemont@igalia.com>
+
+        [JSC] Unskip stress/intl-segmenter.js
+        https://bugs.webkit.org/show_bug.cgi?id=224553
+
+        Unreviewed test gardening.
+
+        It shouldn't fail any more on our bots now that our handling of libicu
+        is more robust.
+
+        * stress/intl-segmenter.js:
+
+2021-04-14  Angelos Oikonomopoulos  <angelos@igalia.com>
+
+        [JSC] Unskip typedarray-functions-with-neutered.js on MIPS
+        https://bugs.webkit.org/show_bug.cgi?id=224428
+
+        Unreviewed test gardening.
+
+        This appears to no longer fail.
+
+        * stress/typedarray-functions-with-neutered.js:
+
+2021-04-13  Angelos Oikonomopoulos  <angelos@igalia.com>
+
+        [JSC] Unskip stress/intl-displaynames.js on ARM
+        https://bugs.webkit.org/show_bug.cgi?id=224427
+
+        Unreviewed test gardening.
+
+        * stress/intl-displaynames.js:
+
+2021-04-10  Mark Lam  <mark.lam@apple.com>
+
+        Enable VMTraps checks in RETURN_IF_EXCEPTION.
+        https://bugs.webkit.org/show_bug.cgi?id=224078
+        rdar://75037057
+
+        Reviewed by Keith Miller.
+
+        * stress/watchdog-fire-while-in-forEachInIterable.js: Added.
+
+2021-04-07  Yusuke Suzuki  <ysuzuki@apple.com>
+
+        [JSC] DUCET level-1 weighs are equal if characters are alphabets
+        https://bugs.webkit.org/show_bug.cgi?id=224047
+
+        Reviewed by Saam Barati and Mark Lam.
+
+        * stress/ducet-level-3-or-4-comparison.js: Added.
+        (shouldBe):
+
+2021-04-07  Yusuke Suzuki  <ysuzuki@apple.com>
+
+        [JSC] Update test262
+        https://bugs.webkit.org/show_bug.cgi?id=224272
+
+        Reviewed by Ross Kirsling.
+
+        * test262/latest-changes-summary.txt:
+        * test262/test/intl402/DisplayNames/options-getoptionsobject.js: Added.
+        * test262/test/intl402/ListFormat/constructor/constructor/options-getoptionsobject.js: Renamed from JSTests/test262/test/intl402/ListFormat/constructor/constructor/options-toobject.js.
+        * test262/test/intl402/ListFormat/constructor/constructor/options-toobject-prototype.js: Removed.
+        * test262/test/intl402/Segmenter/constructor/constructor/options-getoptionsobject.js: Added.
+        * test262/test/intl402/Segmenter/constructor/constructor/options-toobject-prototype.js: Removed.
+        * test262/test/intl402/Segmenter/constructor/constructor/options-toobject.js: Removed.
+        * test262/test/language/expressions/in/rhs-yield-absent-non-strict.js: Added.
+        * test262/test/language/expressions/in/rhs-yield-absent-strict.js: Added.
+        * test262/test/language/expressions/in/rhs-yield-present.js: Added.
+        (isNameIn):
+        * test262/test262-Revision.txt:
+
+2021-04-06  Yusuke Suzuki  <ysuzuki@apple.com>
+
+        [JSC] WasmMemory caging should care about nullptr
+        https://bugs.webkit.org/show_bug.cgi?id=224268
+        <rdar://problem/74654838>
+
+        Reviewed by Mark Lam.
+
+        * wasm/stress/4g-memory-cage.js: Added.
+        (async test):
+        * wasm/stress/more-than-4g-offset-access-oom.js: Added.
+        (async test):
+        * wasm/stress/null-memory-cage-explicit.js: Added.
+        (async test):
+        * wasm/stress/null-memory-cage.js: Added.
+        (async test):
+
+2021-04-06  Alexey Shvayka  <shvaikalesh@gmail.com>
+
+        Symbol and BigInt wrapper objects should perform OrdinaryToPrimitive
+        https://bugs.webkit.org/show_bug.cgi?id=224208
+
+        Reviewed by Yusuke Suzuki.
+
+        * stress/bigint-object-ordinary-toprimitive.js: Added.
+        * stress/symbol-object-ordinary-toprimitive.js: Added.
+
+2021-04-06  Alexey Shvayka  <shvaikalesh@gmail.com>
+
+        Array's toString() is incorrect if join() is non-callable
+        https://bugs.webkit.org/show_bug.cgi?id=224215
+
+        Reviewed by Yusuke Suzuki.
+
+        * stress/array-toString-non-callable-join.js: Added.
+
+2021-04-05  Keith Miller  <keith_miller@apple.com>
+
+        DFG arity fixup nodes should exit to the caller's call opcode
+        https://bugs.webkit.org/show_bug.cgi?id=223278
+
+        Reviewed by Saam Barati.
+
+        * stress/dfg-arity-fixup-uses-callers-exit-origin.js: Added.
+        (main.v22):
+        (main.v30):
+        (main.try.v40):
+        (main.try.v47):
+        (main.try.v56):
+        (main.):
+        (main):
+
+2021-04-02  Alexey Shvayka  <shvaikalesh@gmail.com>
+
+        Reduce bytecode instruction count emitted for `class extends`
+        https://bugs.webkit.org/show_bug.cgi?id=223884
+
+        Reviewed by Yusuke Suzuki.
+
+        * ChakraCore/test/Error/validate_line_column.baseline-jsc:
+
+2021-04-02  Jessica Tallon  <jtallon@igalia.com>
+
+        Add tests for the new type method on certain JS-API wasm objects.
+        https://bugs.webkit.org/show_bug.cgi?id=222412
+
+        Reviewed by Yusuke Suzuki.
+
+        * wasm/js-api/global.js: Added.
+        (assert.throws):
+        * wasm/js-api/table.js:
+        (assert.truthy):
+        * wasm/js-api/test_memory.js:
+
+2021-04-01  Alexey Shvayka  <shvaikalesh@gmail.com>
+
+        Optimize createListFromArrayLike() and Proxy's [[OwnPropertyKeys]] method
+        https://bugs.webkit.org/show_bug.cgi?id=223928
+
+        Reviewed by Yusuke Suzuki.
+
+        * microbenchmarks/json-stringify-array-replacer.js:
+        Reduce running time from over 350ms to ~60ms.
+
+        * microbenchmarks/reflect-own-keys-proxy-2.js: Added.
+        * microbenchmarks/reflect-own-keys-proxy.js: Added.
+
+2021-03-31  Mark Lam  <mark.lam@apple.com>
+
+        Missing exception check in HashMapImpl::add().
+        https://bugs.webkit.org/show_bug.cgi?id=224007
+        rdar://76053163
+
+        Reviewed by Saam Barati.
+
+        * stress/missing-exception-check-in-HashMapImpl-add.js: Added.
+
+2021-03-31  Alexey Shvayka  <shvaikalesh@gmail.com>
+
+        Optimize constructors of ES6 collections
+        https://bugs.webkit.org/show_bug.cgi?id=223953
+
+        Reviewed by Yusuke Suzuki.
+
+        * microbenchmarks/map-constructor.js:
+        * microbenchmarks/set-constructor.js: Added.
+        * microbenchmarks/weak-map-constructor.js: Added.
+        * microbenchmarks/weak-set-constructor.js: Added.
+        * stress/map-constructor-adder.js:
+        * stress/set-constructor-adder.js:
+        * stress/weak-map-constructor-adder-error-cross-realm.js: Added.
+        * stress/weak-map-constructor-adder.js:
+        * stress/weak-set-constructor-adder-error-cross-realm.js: Added.
+        * stress/weak-set-constructor-adder.js:
+        * stress/weak-set-constructor.js:
+
+2021-03-29  Ryan Haddad  <ryanhaddad@apple.com>
+
+        Unreviewed test gardening.
+
+        * stress/early-return-from-builtin.js: Disable this test for memoryLimited configurations.
+
+2021-03-26  Yusuke Suzuki  <ysuzuki@apple.com>
+
+        [JSC] Use AppleICU SPI for canonicalization
+        https://bugs.webkit.org/show_bug.cgi?id=223552
+
+        Reviewed by Ryosuke Niwa.
+
+        * stress/intl-canonical-locale-alias-mapping.js: Added.
+        (shouldBe):
+        (Intl.getCanonicalLocales):
+
+2021-03-25  Truitt Savell  <tsavell@apple.com>
+
+        Unreviewed, reverting r275056.
+
+        This is no longer needed
+
+        Reverted changeset:
+
+        "stress/early-return-from-builtin.js.default is failing on iOS
+        JSC testers"
+        https://commits.webkit.org/r275056
+
+2021-03-25  Truitt Savell  <tsavell@apple.com>
+
+        stress/early-return-from-builtin.js.default is failing on iOS JSC testers
+        rdar://75597901
+
+        Unreviewed test gardening.
+
+        * stress/early-return-from-builtin.js:
+
+2021-03-25  Saam Barati  <sbarati@apple.com>
+
+        early-return-from-builtin.js should try/catch in case of OOM
+        https://bugs.webkit.org/show_bug.cgi?id=223756
+
+        Reviewed by Yusuke Suzuki.
+
+        It's throwing an OOM on iOS.
+
+        * stress/early-return-from-builtin.js:
+
+2021-03-24  Michael Saboff  <msaboff@apple.com>
+
+        [YARR] Interpreter incorrectly matches non-BMP characters with multiple . w/dotAll flag
+        https://bugs.webkit.org/show_bug.cgi?id=223666
+
+        Reviewed by Mark Lam.
+
+        Added tests for dotAll.  Also made sure that we test both JIT and non-JIT execution.
+
+        * stress/regexp-dot-match-nonBMP.js:
+
+2021-03-24  Yusuke Suzuki  <ysuzuki@apple.com>
+
+        [JSC] Rope string equal operation should first check length
+        https://bugs.webkit.org/show_bug.cgi?id=223678
+
+        Reviewed by Mark Lam.
+
+        * stress/redefine-property-same-value-exception-check.js:
+        (shouldThrow):
+
+2021-03-23  Robin Morisset  <rmorisset@apple.com>
+
+        Object.freeze(this) at the global scope can lose a reference to a WatchpointSet
+        https://bugs.webkit.org/show_bug.cgi?id=223608
+
+        Reviewed by Yusuke Suzuki.
+
+        * stress/freeze-global-object.js: Added.
+        (foo):
+
+2021-03-22  Saam Barati  <sbarati@apple.com>
+
+        LiteralParser shouldn't make error messages of length ~2^31
+        https://bugs.webkit.org/show_bug.cgi?id=223483
+        <rdar://75572255>
+
+        Reviewed by Robin Morisset.
+
+        * stress/literal-parser-error-message-oom.js: Added.
+
+2021-03-22  Michael Saboff  <msaboff@apple.com>
+
+        [YARR] Interpreter incorrectly matches non-BMP characters with multiple .
+        https://bugs.webkit.org/show_bug.cgi?id=223498
+
+        Reviewed by Yusuke Suzuki.
+
+        New test.
+
+        * stress/regexp-dot-match-nonBMP.js: Added.
+        (shouldMatch):
+        (shouldntMatch):
+
+2021-03-22  Yusuke Suzuki  <ysuzuki@apple.com>
+
+        [JSC] Intl.Locale should not assume is8Bit
+        https://bugs.webkit.org/show_bug.cgi?id=223553
+
+        Reviewed by Ross Kirsling.
+
+        * stress/intl-locale-non-8bit.js: Added.
+        (shouldBe):
+
+2021-03-19  Mark Lam  <mark.lam@apple.com>
+
+        BrandedStructure should keep its members alive.
+        https://bugs.webkit.org/show_bug.cgi?id=223495
+        rdar://75565765
+
+        Reviewed by Saam Barati.
+
+        * stress/BrandedStructure-should-keep-its-members-alive.js: Added.
+
+== Rolled over to ChangeLog-2021-03-18 ==
